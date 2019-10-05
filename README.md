@@ -109,4 +109,9 @@ Now on to firmware.
 
 
 Currently , this project comes in a form of an Arduino sketch, which has it's limitations, but simplifies other things. You install it as any other arduino sketch via serial interface. 
-Add a bit about elechouse , srxe library , modifications to code...
+
+The sketch has two external and two internal dependencies. First , you will need the nice support library from BitBank2 ( https://github.com/bitbank2/SmartResponseXE ). That adds easy display manipulation and so on. Then, you will need to install a proper board definition. SRXE board is technically compatible with Sparkfun's AtMega128RFA1 dev board (https://learn.sparkfun.com/tutorials/atmega128rfa1-dev-board-hookup-guide/all ) , so you just need to follow their guide to install this board definition into your Arduino IDE. 
+
+The sketch currently has two libraries. One is CC1101 control library based on code released by Elechouse a while ago and it's hosted here: https://github.com/simonmonk/CC1101_arduino . I had to modify a few bits an pieces so it's easier to just include it here. Second is a pocsag decoder which is borrowed from Travis' Goodwatch repo.
+
+
