@@ -1,0 +1,222 @@
+NOTE: this pinout listing was posted to a pastie some time ago, I don't know the original source. 
+
+
+
+SMART Technologies SMART Response(TM) XE Circuit Board Pads/Pinouts
+Document Version 2018-07-28T18:26Z
+Markings On Case - Model No: 03-00182, FCCID: QCISRP03, ID: 4302A-SRP03
+Markings On Board - 25-00188-20-A0
+=======================================================
+
+-------------------------------------------------------
+ISP Pads 
+Pin 1 top left if oriented with SW1 on top of board
+Layout: 1 2
+        3 4
+        5 6
+ 1 - MISO, ATmega128RFA1 pin 39 [PB3:MISO:PDO:PCINT3] 
+ 2 - VCC (3.3V)
+ 3 - SCK, ATmega128RFA1 pin 37 [PB1:SCK:PCINT1] 
+ 4 - MOSI, ATmega128RFA1 pin 38 [PB2:MOSI:PDI:PCINT2]
+ 5 - RST, ATmega128RFA1 pin 12 [RSTN]
+ 6 - GND
+-------------------------------------------------------
+JTAG Pads 
+Pin 1 bottom left if oriented with SW1 on top of board
+Layout: 2 4 6 8 10
+        1 3 5 7 9
+ 1 - TCK, ATmega128RFA1 pin 3 [PF4:ADC4:TCK]
+ 2 - GND
+ 3 - TDO, ATmega128RFA1 pin 5 [PF6:ADC6:TDO]
+ 4 - VCC (3.3V)
+ 5 - TMS, ATmega128RFA1 pin 4 [PF5:ADC5:TMS]
+ 6 - RST, ATmega128RFA1 pin 12 [RSTN]
+ 7 - 
+ 8 - 
+ 9 - TDI, ATmega128RFA1 pin 6 [PF7:ADC7:TDI]
+10 - GND
+-------------------------------------------------------
+Test Points 
+TCK top left if oriented with SW1 on top of board
+Layout: TCK   TMS   TDO    TDI
+                 RST   MISO
+        SCK   GND   VCC    MOSI
+ TCK - ATmega128RFA1 pin 3 [PF4:ADC4:TCK]
+ SCK - ATmega128RFA1 pin 37 [PB1:SCK:PCINT1]
+ TMS - ATmega128RFA1 pin 4 [PF5:ADC5:TMS]
+ GND - GND
+ RST - ATmega128RFA1 pin 12 [RSTN]
+ TDO - ATmega128RFA1 pin 5 [PF6:ADC6:TDO]
+ VCC - VCC (3.3V)
+MISO - ATmega128RFA1 pin 39 [PB3:MISO:PDO:PCINT3]
+ TDI - ATmega128RFA1 pin 6 [PF7:ADC7:TDI]
+MOSI - ATmega128RFA1 pin 38 [PB2:MOSI:PDI:PCINT2]
+-------------------------------------------------------
+Keyboard
+ COL1 - ATmega128RFA1 pin 26 [PD1:SDA:INT1], ATmega128RFA1 pin 52 [PE6:T3:INT6]
+ COL2 - ATmega128RFA1 pin 43 [PB7:OC0A:OC1C:PCINT7]
+ COL3 - ATmega128RFA1 pin 42 [PB6:OC1B:PCINT6] 
+ COL4 - ATmega128RFA1 pin 41 [PB5:OC1A:PCINT5]
+ COL5 - ATmega128RFA1 pin 40 [PB4:OC2A:PCINT4] 
+ COL6 - ATmega128RFA1 pin 46 [PE0:RXD0:PCINT8] *** Also used for Serial (RS232)
+ ROW1 - ATmega128RFA1 pin 50 [PE4:OC3B:INT4] 
+ ROW2 - ATmega128RFA1 pin 64 [PF1:ADC1]
+ ROW3 - ATmega128RFA1 pin 2 [PF3:ADC3:DIG4]
+ ROW4 - ??? other guy says ATmega128RFA1 pin48 [PE2:XCK0:AIN0] ??? !possibly damaged on my board!
+ ROW5 - ATmega128RFA1 pin 47 [PE1:TXD0] *** Also used for Serial (RS232)
+ ROW6 - ATmega128RFA1 pin 32 [PD7:T0] 
+ ROW7 - ATmega128RFA1 pin 14 [PG0:DIG3]
+ ROW8 - ATmega128RFA1 pin 19 [PG5:OC0B]
+ ROW9 - ATmega128RFA1 pin 30 [PD5:XCK1]
+ROW10 - ATmega128RFA1 pin 29 [PD4:ICP1]
+-------------------------------------------------------
+Display (P3) marked "S028HN118A VER:A1" 
+Pin 1 on right if oriented with SW1 on top of board
+ 1 - VPP pad
+ 2 - ATmega128RFA1 pin 37 [PB1:SCK:PCINT1], ISP pad 3, Test Point SCK, U2 pin 6
+ 3 - ATmega128RFA1 pin 38 [PB2:MOSI:PDI:PCINT2], ISP pad 4, Test Point MOSI, U2 pin 5
+ 4 - R31 to ATmega128RFA1 pin 31 [PD6:T1] 
+ 5 - R30 to ATmega128RFA1 pin 16 [PG2:AMR]
+ 6 - R29 to ATmega128RFA1 pin 53 [PE7:ICP3:INT7:CLKO], CLK0 pad
+ 7 - EXT pad
+ 8 - VCC
+ 9 - C7 to C23 to Vin (6V)
+10 - GND
+11 - GND
+12 - VCC
+13 - C27 to C23 to Vin (6V)
+14 - C6 to Display pin 15
+15 - C6 to Display pin 14
+16 - C28 to C23 to Vin (6V)
+-------------------------------------------------------
+Speaker (unpopulated)
+Pin 1 top if oriented with SW1 on top of board)
+ 1 - Q1 (unpopulated) pin 2
+ 2 - Q1 (unpopulated) pin 2
+ 3 - R10 to ? !damaged on my board!
+ 4 - D1 (unpopulated) pin 3 (D1 pin 1 to GND)
+-------------------------------------------------------
+U2 (Marked "ATMLH028 Z7H1164A") possible Two-Wire Serial EEPROM Atmel AT24C? 
+Pin 1 top right if oriented with SW1 on top of board
+ 1 - ATmega128RFA1 pin 28 [PD3:TXD1:INT3], CS_Flash pad
+ 2 - ATmega128RFA1 pin 39 [PB3:MISO:PDO:PCINT3], ISP pad 1, Test Point MISO
+ 3 - R17 to VCC (3.3V)
+ 4 - GND
+ 5 - ATmega128RFA1 pin 38 [PB2:MOSI:PDI:PCINT2], ISP pad 4, Test Point MOSI
+ 6 - ATmega128RFA1 pin 37 [PB1:SCK:PCINT1], ISP pad 3, Test Point SCK
+ 7 - R16 to C53 to GND
+ 8 - VCC (3.3V) 
+-------------------------------------------------------
+U4 (Marked "PHNI") 5-pin package, possible TPS62203DBV 3.3V DC-DC converter 
+Pin 1 bottom left if oriented with SW1 on top of board
+Layout: 5   4
+        1 2 3
+ 1 - Vin (battery pack +, 6VDC nominal)
+ 2 - C23 to Vin (battery pack +, 6VDC nominal)
+ 3 - Vin (battery pack +, 6VDC nominal)
+ 4 - L3 to VCC (3.3V)
+ 5 - VCC (3.3V)
+-------------------------------------------------------
+SW1 (Power Switch), Normally Open 
+Left and Right if oriented with SW1 on top of board
+ L - GND
+ R - ATmega128RFA1 pin 27 [PD2:RXD1:INT2], Z1 pin 1
+-------------------------------------------------------
+ATmega128RFA1
+Pin 1 top right if oriented with SW1 on top of board
+ 1 - [PF2:ADC2:DIG2] - 
+ 2 - [PF3:ADC3:DIG4] - Keyboard ROW3
+ 3 - [PF4:ADC4:TCK] - JTAG Pad 1, Test Point TCK
+ 4 - [PF5:ADC5:TMS] - JTAG Pad 5, Test Point TMS
+ 5 - [PF6:ADC6:TDO] - JTAG Pad 3, Test Point TDO
+ 6 - [PF7:ADC7:TDI] - JTAG Pad 9, Test Point TDI
+ 7 - [AVSS_RFP] - GND
+ 8 - [RFP] - GND
+ 9 - [RFN] - GND
+10 - [AVSS_RFN] - GND
+11 - [TST] - 
+12 - [RSTN] - ISP Pad 5, JTAG Pad 6, Test Point RST
+13 - [RSTON] - 
+14 - [PG0:DIG3] - Keyboard ROW7
+15 - [PG1:DIG1] - 
+16 - [PG2:AMR] - Display pin 5
+17 - [PG3:TOSC2] - Y2 (32.768KHz crystal)
+18 - [PG4:TOSC1] - Y2 (32.768KHz crystal)
+19 - [PG5:OC0B] - Keyboard ROW8
+20 - [DVSS:DSVSS] - GND
+21 - [DVDD] - 
+22 - [DVDD] - 
+23 - [DEVDD] - VCC (3.3V)
+24 - [DVSS] - GND
+25 - [PD0:SCL:INT0] - 
+26 - [PD1:SDA:INT1] - Keyboard COL1 *** Also pin 52
+27 - [PD2:RXD1:INT2] - SW1 Right Side (SW1 NO, closes to GND)
+28 - [PD3:TXD1:INT3] - U2 pin 8, CS_Flash
+29 - [PD4:ICP1] - Keyboard ROW10
+30 - [PD5:XCK1] - Keyboard ROW9 
+31 - [PD6:T1] - Display pin 4
+32 - [PD7:T0] - 
+33 - [CLKI] - 
+34 - [DEVDD] - VCC (3.3V)
+35 - [DVSS] - GND
+36 - [PB0:SSN:PCINT0] - 
+37 - [PB1:SCK:PCINT1] - Display pin 2, ISP Pad 3, U2 Pin 6, Test Point SCK
+38 - [PB2:MOSI:PDI:PCINT2] - Display Pin 3, ISP Pad 4, U2 Pin 5, Test Point MOSI
+39 - [PB3:MISO:PDO:PCINT3] - ISP Pad 1, Test Point MISO
+40 - [PB4:OC2A:PCINT4] - Keyboard COL5
+41 - [PB5:OC1A:PCINT5] - Keyboard COL4
+42 - [PB6:OC1B:PCINT6] - Keyboard COL3
+43 - [PB7:OC0A:OC1C:PCINT7] - Keyboard COL2
+44 - [DEVDD] - VCC (3.3V)
+45 - [DVSS] - GND
+46 - [PE0:RXD0:PCINT8] - Keyboard COL6, 16-pin SOIC pin 9
+47 - [PE1:TXD0] - Keyboard ROW5, 16-pin SOIC pin 11
+48 - [PE2:XCK0:AIN0] - ??? other guy says Keyboard ROW4 ???
+49 - [PE3:OC3A:AIN1] - Q1 pin 1 (unpopulated transistor to drive Speaker pins 1,2)
+50 - [PE4:OC3B:INT4] - Keyboard ROW1
+51 - [PE5:OC3C:INT5] - 
+52 - [PE6:T3:INT6] - Keyboard COL1 *** Also pin 26
+53 - [PE7:ICP3:INT7:CLKO] - Display pin 6, CLK0 pad
+54 - [DEVDD] - VCC (3.3V)
+55 - [DVSS] - GND
+56 - [XTAL2] - Y1 (marked T160 MSF9, 16MHz crystal?)
+57 - [XTAL1] - Y1 (marked T160 MSF9, 16MHz crystal?)
+58 - [AVSS:ASVSS] - GND
+59 - [EVDD] - VCC (3.3V)
+60 - [AVDD] - 
+61 - [AVSS] - GND
+62 - [AREF] - C17 (disconnected) to GND
+63 - [PF0:ADC0] - 
+64 - [PF1:ADC1] - Keyboard ROW2
+-------------------------------------------------------
+16-pin SOIC package outline (possibly intended to be a MAX232 chip, but some pins are mixed up?)
+Pin 1 bottom right if oriented with SW1 on top of board
+ 1 - R36 to GND, RS232 pad 2
+ 2 - C33 to pin 4
+ 3 - C41 to GND
+ 4 - C33 to pin 2
+ 5 - C42 to pin 6
+ 6 - C42 to pin 5
+ 7 - C43 to GND
+ 8 - RS232 pad 3
+ 9 - ATmega128RFA1 pin 46 [PE0:RXD0:PCINT8] *** Also used for Keyboard COL6
+10 - not connected ?
+11 - ATmega128RFA1 pin 47 [PE1:TXD0] *** Also used for Keyboard ROW5
+12 - pin 16
+13 - RS232 pad 1
+14 - C30 to pin 15
+15 - C30 to pin 14
+16 - pin 12, R37 to VCC (3.3V)
+-------------------------------------------------------
+RS232 pads
+Pin 1 top left if oriented with SW1 on top of board
+Layout: 1 2
+        3 4
+        5 6
+ 1 - 16-pin package pin 13
+ 2 - R36 to GND, 16-pin package pin 1
+ 3 - 16-pin package pin 8
+ 4 - R35 to VCC (3.3V)
+ 5 - GND, RS232 pad 6
+ 6 - GND, RS232 pad 5
+-------------------------------------------------------
