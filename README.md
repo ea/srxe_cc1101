@@ -1,9 +1,11 @@
 # Smart Response XE & CC1101 
 
-![srxe_cc1101_fin](photos/srxe_cc1101_fin.png)
+![srxe_cc1101_fin](photos/specan.png)
 
 This project repurposes the Smart Response XE device for digital radio trickery by adding a CC1101 module to it. 
 Initial application is a proof of concept DAPNET pager receiver. Currently in very early stage that can only properly receive short frames.
+
+Additionally, there is a spectrum analyzer application showcased in above photo.  
 
 
 ## Smart Response XE 
