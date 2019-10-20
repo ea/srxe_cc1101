@@ -188,8 +188,8 @@ void plotch(uint8_t ch){
   chan_table[ch].last_drawn = ss;
 
   if(height == TALL){
-    s = MAX((ss - vscroll),0);
-    m = MAX((chan_table[ch].max - vscroll),0);
+    s = MAX((ss - vscroll)>>1,0);
+    m = MAX((chan_table[ch].max - vscroll)>>1,0);
   }else{
     s = MAX((ss - vscroll)>>2,0);
     m = MAX((chan_table[ch].max - vscroll)>>2,0);
