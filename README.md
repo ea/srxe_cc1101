@@ -112,8 +112,11 @@ Now on to firmware.
 
 Currently , this project comes in a form of an Arduino sketch, which has it's limitations, but simplifies other things. You install it as any other arduino sketch via serial interface. 
 
-The sketch has two external and two internal dependencies. First , you will need the nice support library from BitBank2 ( https://github.com/bitbank2/SmartResponseXE ). That adds easy display manipulation and so on. Then, you will need to install a proper board definition. SRXE board is technically compatible with Sparkfun's AtMega128RFA1 dev board (https://learn.sparkfun.com/tutorials/atmega128rfa1-dev-board-hookup-guide/all ) , so you just need to follow their guide to install this board definition into your Arduino IDE. 
+Compiled binaries (hex files actually) are provided in `bin` directory.
 
-The sketch currently has two libraries. One is CC1101 control library based on code released by Elechouse a while ago and it's hosted here: https://github.com/simonmonk/CC1101_arduino . I had to modify a few bits an pieces so it's easier to just include it here. Second is a pocsag decoder which is borrowed from Travis' Goodwatch repo.
+The sketch has two external and two internal dependencies. ~First , you will need the nice support library from BitBank2 ( https://github.com/bitbank2/SmartResponseXE )~. First , install a nice SRXE support library from BitBank2 (my fork adds a couple of functions that simplify drawing thigs https://github.com/ea/SmartResponseXE). That adds easy display manipulation and so on. Then, you will need to install a proper board definition. SRXE board is technically compatible with Sparkfun's AtMega128RFA1 dev board (https://learn.sparkfun.com/tutorials/atmega128rfa1-dev-board-hookup-guide/all ) , ~so you just need to follow their guide to install this board definition into your Arduino IDE~. Old sparkfun board definitions seem to be quite stale, but PDXBadgers have an updated, patched version here (along with some other fun SRXE sketches): https://github.com/pdxbadgers/5ohBEE-2019 . 
+
+
+Both current sketches rely on a separate CC1101 driver library which was based on https://github.com/simonmonk/CC1101_arduino but modified to suit my needs better. It can be found here: https://github.com/ea/CC1101.  I had to modify a few bits an pieces so it's easier to just separate the code. The pocsag sketch uses a pocsag decoder which is borrowed from Travis' Goodwatch repo. Spectrum analyzer code was ported from IM-me specan: https://github.com/mossmann/im-me/tree/master/specan
 
 
