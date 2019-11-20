@@ -1,4 +1,4 @@
-#include "src/cc1101/ELECHOUSE_CC1101.h"
+#include <CC1101.h>
 #include <SmartResponseXE.h>
 #include "src/pocsag/pocsag.h"
 
@@ -22,20 +22,20 @@ void setup()
   SRXEWriteString(0,0,"To send:", FONT_LARGE, 3, 0); 
   SRXEWriteString(0,40,"Received:", FONT_LARGE, 3, 0); 
   
-  ELECHOUSE_cc1101.Init(F_DAP);
+  cc1101.Init(F_DAP);
   delay(100);
-  ELECHOUSE_cc1101.SetReceive();
+  cc1101.SetReceive();
 }
 
 
 
 // NOTE: doesn't send a valid POCSAG message, just plain ASCII , but with all the same radio config, for testing.
 void sendmsg(){
-  ELECHOUSE_cc1101.Init(F_DAP);
+  cc1101.Init(F_DAP);
   delay(100);
-  ELECHOUSE_cc1101.SendData(msgbuff, strlen((char*)msgbuff));
-  ELECHOUSE_cc1101.Init(F_DAP);
-  ELECHOUSE_cc1101.SetReceive();
+  cc1101.SendData(msgbuff, strlen((char*)msgbuff));
+  cc1101.Init(F_DAP);
+  cc1101.SetReceive();
 }
   
 
@@ -77,9 +77,9 @@ void loop()
       SRXEWriteString(0,20,(char *) msgbuff, FONT_LARGE, 3, 0);
    }
 
-  if (ELECHOUSE_cc1101.CheckReceiveFlag()){
+  if (cc1101.CheckReceiveFlag()){
 
-    int len = ELECHOUSE_cc1101.ReceiveData(buffer);
+    int len = cc1101.ReceiveData(buffer);
 
     if(len) {
       buffer[len] = '\0';
@@ -105,6 +105,6 @@ void loop()
         if(line > 100) line = 60;
       }
     }
-    ELECHOUSE_cc1101.SetReceive();
+    cc1101.SetReceive();
   }
 } 
