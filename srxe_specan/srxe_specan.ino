@@ -1,5 +1,5 @@
 #include <SmartResponseXE.h>
-#include "src/ELECHOUSE_CC1101.h"
+#include <CC1101.h>
 #include "src/specan.h"
 #include <stdint.h>
 
@@ -122,7 +122,7 @@ void setup() {
 
   SRXEInit(0xe7, 0xd6, 0xa2); // initialize display
   Serial.println("Initialized display.");
-  ELECHOUSE_cc1101.Init();
+  cc1101.Init();
   delay(100);
   Serial.println("cc1101 init!");
   init_all();
@@ -224,11 +224,11 @@ void loop() {
     tune(ch);
     poll_keyboard(); 
 
-    ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
+    cc1101.SpiStrobe(CC1101_SRX);
     plotch(ch); 
     if (width == NARROW)    for (int i = 350; i-- ;); // copied , check if necessary, drawing to the screen is pretty slow        
     
-    chan_table[ch].ss[sweep] = ELECHOUSE_cc1101.SpiReadStatus(CC1101_RSSI) ^ 0x80;
+    chan_table[ch].ss[sweep] = cc1101.SpiReadStatus(CC1101_RSSI) ^ 0x80;
     
     if (max_hold){
       chan_table[ch].max = MAX(chan_table[ch].ss[sweep],chan_table[ch].max);
@@ -236,7 +236,7 @@ void loop() {
       chan_table[ch].max = 0;         
     }
     
-    ELECHOUSE_cc1101.SpiStrobe(CC1101_SIDLE);
+    cc1101.SpiStrobe(CC1101_SIDLE);
   }  
   ++sweep;
   sweep %= persistence;

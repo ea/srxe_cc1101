@@ -18,7 +18,7 @@
  */
 
 #include "specan.h"
-#include "ELECHOUSE_CC1101.h"
+#include "CC1101.h"
 
 /* globals */
 channel_info chan_table[NUM_CHANNELS];
@@ -37,22 +37,27 @@ uint8_t persistence;
 
 
 void radio_setup() {
+
+	static const uint8_t specan_settings [] = {
 	/* IF of 457.031 kHz */
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCTRL1,0x12);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCTRL0,0x00);
+	CC1101_FSCTRL1,0x12,
+	CC1101_FSCTRL0,0x00,
 
 	/* disable 3 highest DVGA settings */
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_AGCCTRL2, 0xC0);
+	CC1101_AGCCTRL2, 0xC0,
 
 	/* frequency synthesizer calibration */
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL3, 0xEA);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL2, 0x2A);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL1, 0x00);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL0, 0x1F);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_TEST2 ,0x88);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_TEST1 ,0x31);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_TEST0 ,0x09);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_MCSM0 ,0);
+	CC1101_FSCAL3, 0xEA,
+	CC1101_FSCAL2, 0x2A,
+	CC1101_FSCAL1, 0x00,
+	CC1101_FSCAL0, 0x1F,
+	CC1101_TEST2 ,0x88,
+	CC1101_TEST1 ,0x31,
+	CC1101_TEST0 ,0x09,
+	CC1101_MCSM0 ,0,
+	};
+
+	cc1101.RadioConfigure(specan_settings);
 }
 
 /* set the channel bandwidth */
@@ -60,13 +65,13 @@ void set_filter() {
 	/* channel spacing should fit within 80% of channel filter bandwidth */
 	switch (width) {
 	case NARROW:
-		ELECHOUSE_cc1101.SpiWriteReg(CC1101_MDMCFG4,0xEC); /* 67.708333 kHz */
+		cc1101.SpiWriteReg(CC1101_MDMCFG4,0xEC); /* 67.708333 kHz */
 		break;
 	case ULTRAWIDE:
-		ELECHOUSE_cc1101.SpiWriteReg(CC1101_MDMCFG4,0x0C); /* 812.5 kHz */
+		cc1101.SpiWriteReg(CC1101_MDMCFG4,0x0C); /* 812.5 kHz */
 		break;
 	default:
-		ELECHOUSE_cc1101.SpiWriteReg(CC1101_MDMCFG4,0x6C); /* 270.833333 kHz */
+		cc1101.SpiWriteReg(CC1101_MDMCFG4,0x6C); /* 270.833333 kHz */
 		break;
 	}
 }
@@ -76,21 +81,18 @@ void set_radio_freq(uint32_t freq) {
 	/* the frequency setting is in units of 396.728515625 Hz */
 
 	uint32_t setting = (uint32_t) (freq * .0025206154);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ2,(setting >> 16) & 0xff);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ1,(setting >> 8) & 0xff);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ0,setting & 0xff);
-	//ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ2,0x10);
-	//ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ1,0xa7);
-	//ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ0,0x62);
+	cc1101.SpiWriteReg(CC1101_FREQ2,(setting >> 16) & 0xff);
+	cc1101.SpiWriteReg(CC1101_FREQ1,(setting >> 8) & 0xff);
+	cc1101.SpiWriteReg(CC1101_FREQ0,setting & 0xff);
 
 if ((band == BAND_300 && freq < MID_300) ||
 			(band == BAND_400 && freq < MID_400) ||
 			(band == BAND_900 && freq < MID_900)){
 		/* select low VCO */
-		ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL2,0x0A);
+		cc1101.SpiWriteReg(CC1101_FSCAL2,0x0A);
 	}else{
 		/* select high VCO */
-		ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL2,0x2A);
+		cc1101.SpiWriteReg(CC1101_FSCAL2,0x2A);
 	}
 
 }
@@ -99,27 +101,27 @@ if ((band == BAND_300 && freq < MID_300) ||
 void calibrate_freq(uint32_t freq, uint8_t ch) {
 	set_radio_freq(freq);
 
-	ELECHOUSE_cc1101.SpiStrobe(CC1101_SCAL);
-	ELECHOUSE_cc1101.SpiStrobe(CC1101_SRX);
+	cc1101.SpiStrobe(CC1101_SCAL);
+	cc1101.SpiStrobe(CC1101_SRX);
 
 	/* wait for calibration */
 	delay(2);
 
 	/* store frequency/calibration settings */
-	chan_table[ch].freq2 = ELECHOUSE_cc1101.SpiReadReg(CC1101_FREQ2);
-	chan_table[ch].freq1 = ELECHOUSE_cc1101.SpiReadReg(CC1101_FREQ1);
-	chan_table[ch].freq0 = ELECHOUSE_cc1101.SpiReadReg(CC1101_FREQ0);
-	chan_table[ch].fscal3 = ELECHOUSE_cc1101.SpiReadReg(CC1101_FSCAL3);
-	chan_table[ch].fscal2 = ELECHOUSE_cc1101.SpiReadReg(CC1101_FSCAL2);
-	chan_table[ch].fscal1 = ELECHOUSE_cc1101.SpiReadReg(CC1101_FSCAL1);
+	chan_table[ch].freq2 = cc1101.SpiReadReg(CC1101_FREQ2);
+	chan_table[ch].freq1 = cc1101.SpiReadReg(CC1101_FREQ1);
+	chan_table[ch].freq0 = cc1101.SpiReadReg(CC1101_FREQ0);
+	chan_table[ch].fscal3 = cc1101.SpiReadReg(CC1101_FSCAL3);
+	chan_table[ch].fscal2 = cc1101.SpiReadReg(CC1101_FSCAL2);
+	chan_table[ch].fscal1 = cc1101.SpiReadReg(CC1101_FSCAL1);
 
 	/* get initial RSSI measurement */
-	chan_table[ch].ss[sweep] = (ELECHOUSE_cc1101.SpiReadReg(CC1101_RSSI) ^ 0x80);
+	chan_table[ch].ss[sweep] = (cc1101.SpiReadReg(CC1101_RSSI) ^ 0x80);
 	chan_table[ch].max = 0;
 	chan_table[ch].last_drawn =  0;
 
 //	RFST = RFST_SIDLE;
-	ELECHOUSE_cc1101.SpiStrobe(CC1101_SIDLE);
+	cc1101.SpiStrobe(CC1101_SIDLE);
 
 }
 
@@ -259,14 +261,16 @@ uint16_t set_center_freq(uint16_t freq) {
 /* tune the radio using stored calibration */
 void tune(uint8_t ch) {
 
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ2,chan_table[ch].freq2);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ1,chan_table[ch].freq1);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FREQ0,chan_table[ch].freq0);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL3,chan_table[ch].fscal3);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL2,chan_table[ch].fscal2);
-	ELECHOUSE_cc1101.SpiWriteReg(CC1101_FSCAL1,chan_table[ch].fscal1);
+uint8_t tune_cfg[] = {
+	CC1101_FREQ2,chan_table[ch].freq2,
+	CC1101_FREQ1,chan_table[ch].freq1,
+	CC1101_FREQ0,chan_table[ch].freq0,
+	CC1101_FSCAL3,chan_table[ch].fscal3,
+	CC1101_FSCAL2,chan_table[ch].fscal2,
+	CC1101_FSCAL1,chan_table[ch].fscal1
+	};
 
-
+	cc1101.RadioConfigure(tune_cfg);
 }
 
 void set_width(uint8_t w) {
