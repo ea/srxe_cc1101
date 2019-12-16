@@ -111,6 +111,11 @@ void poll_keyboard() {
     set_center_freq(center_freq);
     sweep %= persistence;
     break;
+  case 0xf0:
+      SRXEWriteString(0,20,"Sleeping", FONT_LARGE,3, 0);
+      SRXESleep();
+
+
   default:
     break;
   }
