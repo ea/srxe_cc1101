@@ -55,6 +55,7 @@ void radio_setup() {
 	CC1101_TEST1 ,0x31,
 	CC1101_TEST0 ,0x09,
 	CC1101_MCSM0 ,0,
+    0,0
 	};
 
 	cc1101.RadioConfigure(specan_settings);
@@ -267,7 +268,8 @@ uint8_t tune_cfg[] = {
 	CC1101_FREQ0,chan_table[ch].freq0,
 	CC1101_FSCAL3,chan_table[ch].fscal3,
 	CC1101_FSCAL2,chan_table[ch].fscal2,
-	CC1101_FSCAL1,chan_table[ch].fscal1
+	CC1101_FSCAL1,chan_table[ch].fscal1,
+    0,0
 	};
 
 	cc1101.RadioConfigure(tune_cfg);
