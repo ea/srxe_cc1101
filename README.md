@@ -77,7 +77,7 @@ Next step is to get access to secial TX and RX lines. On the right hand side of 
 
 ![srxe_cc1101_fin](photos/uart.png)
 
-First, you need to bridge the two topmost pads, and then bridge the pads 3,4 and 5. After this, pads 1 and 2 are TX and RX. We'll want access to those when the device is assembled, so solder 2 wires of about 10cm to these. These will be routed out through the battery compartment and can be easily attached to an usb2uart adapter (GND and Vcc can easily be accessed via battery terminals). 
+First, you need to bridge the two topmost pads, and then bridge the pads 3,4 and 5. After this, pads 1 and 3 are RX and TX respectively. We'll want access to those when the device is assembled, so solder 2 wires of about 10cm to these. These will be routed out through the battery compartment and can be easily attached to an usb2uart adapter (GND and Vcc can easily be accessed via battery terminals). 
 You'll want to confirm that this serial connection is indeed working before reassembling the case.
 
 ## Adding a CC1101 module
@@ -110,7 +110,7 @@ Now on to firmware.
 ## Firmware
 
 
-Currently , this project comes in a form of an Arduino sketch, which has it's limitations, but simplifies other things. You install it as any other arduino sketch via serial interface. 
+Currently , this project comes in a form of an Arduino sketch, which has it's limitations, but simplifies other things. You install it as any other arduino sketch via serial interface (serial0 if you use the serial port as described above). 
 
 Compiled binaries (hex files actually) are provided in `bin` directory.
 
